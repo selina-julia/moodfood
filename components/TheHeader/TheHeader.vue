@@ -1,7 +1,7 @@
 <template>
-  <header class="main-header backdrop-filter backdrop-blur-lg my-2">
+  <header class="main-header backdrop-filter backdrop-blur-lg py-2">
     <div class="flex justify-between items-center px-16">
-      <div class="text-2xl font-bold title">Foodie</div>
+      <div class="text-2xl font-bold">mood<span class="title">food</span></div>
       <nav class="main-nav">
         <ul class="nav-links">
           <nuxt-link to="/" tag="li" class="nav-link"
@@ -43,6 +43,7 @@
   align-items: center;
   margin: 0 1rem;
   padding: 0.3rem;
+  font-weight: bold;
 }
 .nav-link.nuxt-link-exact-active {
   border-bottom: 3px solid #f6cc63;
@@ -53,7 +54,8 @@
 }
 .nav-link a:hover,
 .nav-link a:active,
-.nav-link.nuxt-link-exact-active a {
+.nav-link.nuxt-link-exact-active a,
+.title {
   color: #f6cc63;
 }
 </style>

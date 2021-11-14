@@ -1,6 +1,6 @@
 <template>
   <div class="flex">
-    <aside class="px-4">filter here</aside>
+    <aside class="w-2/12">filter here</aside>
     <section
       id="posts"
       class="flex flex-wrap gap-8 w-100 container mx-auto px-4"

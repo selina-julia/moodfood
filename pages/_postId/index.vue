@@ -4,8 +4,8 @@
       class="post-thumbnail"
       :style="{ backgroundImage: 'url(' + image.filename + ')' }"
     ></div>
-    <section class="post-content">
-      <h1 class="text-3xl font-bold">{{ title }}</h1>
+    <section class="post-content container mx-auto px-4 pt-8">
+      <h1 class="text-3xl font-bold mb-5">{{ title }}</h1>
       <p>{{ content }}</p>
     </section>
   </div>
@@ -36,11 +36,7 @@ export default {
   background-size: cover;
   background-position: center;
 }
-.post-content {
-  width: 80%;
-  max-width: 500px;
-  margin: auto;
-}
+
 .post-content p {
   white-space: pre-line;
 }
