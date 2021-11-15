@@ -40,7 +40,7 @@ export default {
               id: post.slug,
               title: post.content.title,
               previewText: post.content.description,
-              thumbnailUrl: post.content.thumbnail,
+              thumbnailUrl: post.content.thumbnail.filename,
             }
           }),
         }

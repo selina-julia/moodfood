@@ -5,11 +5,7 @@
         :style="{ backgroundImage: 'url(' + thumbnailImage.filename + ')' }"
         class="post-preview-thumbnail"
       ></div> -->
-      <img
-        class="post-preview-thumbnail"
-        :src="thumbnailImage.filename"
-        alt=""
-      />
+      <img class="post-preview-thumbnail" :src="thumbnailImage" alt="" />
       <div class="post-preview-content mb-10">
         <h1 class="text-2xl font-bold pr-5 mb-2">{{ title }}</h1>
 
