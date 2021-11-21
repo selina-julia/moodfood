@@ -1,6 +1,6 @@
 <template>
   <nuxt-link :v-if="isVisible" :to="id">
-    <article class="post-preview">
+    <article class="post-preview relative">
       <img class="post-preview-thumbnail mb-3" :src="thumbnailImage" alt="" />
 
       <div class="post-preview-content flex flex-col justify-between">
@@ -18,6 +18,26 @@
           </span>
           <span>{{ minutes }} min</span>
         </div>
+      </div>
+      <div
+        class="
+          post-like-button
+          w-14
+          h-14
+          bg-white
+          rounded-xl
+          absolute
+          -top-2
+          -right-2
+          flex
+          items-center
+          justify-center
+        "
+        @click="setFavorites(title)"
+      >
+        <object data="../../static/icons/heart.svg" type="image/svg+xml">
+          <img class="w-8 h-8" src="../../static/icons/heart.svg" />
+        </object>
       </div>
     </article>
   </nuxt-link>
@@ -63,6 +83,7 @@ export default {
   data() {
     return {
       iterator: 0,
+      favoriteStorage: [],
     }
   },
 
@@ -79,6 +100,15 @@ export default {
         break
     }
     console.log(this.iterator)
+  },
+
+  methods: {
+    setFavorites(fav) {
+      this.favoriteStorage.push(fav)
+      console.log(this.favoriteStorage)
+      localStorage.setItem('favorites', JSON.stringify(this.favoriteStorage))
+    },
+    setFavoritesInLocalStorage() {},
   },
 }
 </script>
@@ -111,5 +141,9 @@ a {
 
 .difficulty-icon {
   width: 25px;
+}
+
+.post-like-button {
+  border: 1px solid lightgray;
 }
 </style>

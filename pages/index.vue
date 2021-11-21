@@ -1,9 +1,15 @@
 <template>
   <div class="flex">
-    <aside class="w-2/12">
-      <p v-for="cat in categories" :key="cat" @click="filter(cat)">
-        {{ cat }}
-      </p>
+    <aside class="w-2/12 pt-6 mr-5">
+      <div
+        v-for="cat in categories"
+        :key="cat"
+        class="mb-3"
+        @click="filter(cat)"
+      >
+        <input :id="cat" type="checkbox" :name="cat" />
+        <label :for="cat">{{ cat }}</label>
+      </div>
     </aside>
     <section
       id="posts"
@@ -104,5 +110,23 @@ export default {
 <style scoped>
 #posts {
   width: 100%;
+}
+
+aside {
+  background: #fdf9f4;
+  position: relative;
+  border-radius: 0 20px 20px 0;
+}
+
+aside::before {
+  position: absolute;
+  left: -200px;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: #fdf9f4;
+  content: '';
+  z-index: -1;
+  border-radius: 0 20px 20px 0;
 }
 </style>
