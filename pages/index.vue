@@ -7,24 +7,13 @@
         class="mb-3"
         @click="filter(cat)"
       >
-        <input :id="cat" type="checkbox" :name="cat" />
+        <input :id="cat" type="radio" name="cats" />
         <label :for="cat">{{ cat }}</label>
       </div>
     </aside>
     <section
       id="posts"
-      class="
-        grid
-        md:grid-cols-2
-        lg:grid-cols-3
-        xl:grid-cols-4
-        gap-8
-        w-100
-        container
-        mx-auto
-        px-4
-        mb-8
-      "
+      class="container grid gap-8 px-4 mx-auto mb-8  md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 w-100"
     >
       <PostPreview
         v-for="post in posts"
@@ -34,7 +23,7 @@
         :excerpt="post.previewText"
         :thumbnailImage="post.thumbnailUrl"
         :categories="post.categories"
-        :isVisible="isVisible"
+        :selectedCategory="selectedCat"
         :difficulty="post.difficulty"
         :minutes="post.minutes"
       />
@@ -77,31 +66,15 @@ export default {
 
   data() {
     return {
-      categories: ['Chinesisch', 'Italienisch', 'Österreichisch'],
-      isVisible: true,
+      categories: ['Alle', 'Chinesisch', 'Italienisch', 'Österreichisch'],
+      isVisible: false,
+      selectedCat: '',
     }
   },
 
-  // mounted() {
-  //   console.log(this.posts)
-  // },
-
   methods: {
     filter(selectedCat): void {
-      this.posts.forEach((post) => {
-        if (!post.categories) {
-          return
-        }
-
-        post.categories.forEach((cats) => {
-          if (cats === selectedCat) {
-            this.isVisible = true
-          } else {
-            this.isVisible = false
-          }
-        })
-        console.log(this.isVisible)
-      })
+      this.selectedCat = selectedCat
     },
   },
 }

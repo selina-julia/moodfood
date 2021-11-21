@@ -1,10 +1,10 @@
 <template>
-  <nuxt-link :v-if="isVisible" :to="id">
-    <article class="post-preview relative">
-      <img class="post-preview-thumbnail mb-3" :src="thumbnailImage" alt="" />
+  <article v-if="filter()" class="relative post-preview">
+    <nuxt-link :to="id">
+      <img class="mb-3 post-preview-thumbnail" :src="thumbnailImage" alt="" />
 
-      <div class="post-preview-content flex flex-col justify-between">
-        <h1 class="text-2xl font-bold pr-5 mb-2">{{ title }}</h1>
+      <div class="flex flex-col justify-between post-preview-content">
+        <h1 class="pr-5 mb-2 text-2xl font-bold">{{ title }}</h1>
 
         <div class="flex justify-between">
           <span class="flex">
@@ -19,28 +19,37 @@
           <span>{{ minutes }} min</span>
         </div>
       </div>
-      <div
-        class="
-          post-like-button
-          w-14
-          h-14
-          bg-white
-          rounded-xl
-          absolute
-          -top-2
-          -right-2
-          flex
-          items-center
-          justify-center
-        "
-        @click="setFavorites(title)"
+    </nuxt-link>
+    <div
+      class="absolute flex items-center justify-center bg-white  w-14 h-14 rounded-xl -top-2 -right-2"
+      :class="{
+        'post-like-button__default': !isFavoritesClicked,
+        'post-like-button__clicked': isFavoritesClicked,
+      }"
+      @click="setFavorites(title)"
+    >
+      <object
+        v-if="!isFavoritesClicked"
+        data="../../static/icons/heart.svg"
+        type="image/svg+xml"
       >
-        <object data="../../static/icons/heart.svg" type="image/svg+xml">
-          <img class="w-8 h-8" src="../../static/icons/heart.svg" />
-        </object>
-      </div>
-    </article>
-  </nuxt-link>
+        <img
+          class="w-8 h-8 transition duration-200 ease-in-out"
+          src="../../static/icons/heart.svg"
+        />
+      </object>
+      <object
+        v-if="isFavoritesClicked"
+        data="../../static/icons/heart.svg"
+        type="image/svg+xml"
+      >
+        <img
+          class="w-8 h-8 transition duration-200 ease-in-out"
+          src="../../static/icons/heart-full.svg"
+        />
+      </object>
+    </div>
+  </article>
 </template>
 
 <script>
@@ -66,12 +75,12 @@ export default {
       type: String[{}],
       required: true,
     },
-    isVisible: {
-      type: Boolean,
+    selectedCategory: {
+      type: String,
       required: true,
     },
     minutes: {
-      type: Number,
+      type: String,
       required: true,
     },
     difficulty: {
@@ -84,6 +93,8 @@ export default {
     return {
       iterator: 0,
       favoriteStorage: [],
+      isFavoritesClicked: false,
+      isVisible: true,
     }
   },
 
@@ -99,16 +110,23 @@ export default {
         this.iterator = 3
         break
     }
-    console.log(this.iterator)
   },
 
   methods: {
     setFavorites(fav) {
       this.favoriteStorage.push(fav)
-      console.log(this.favoriteStorage)
+
       localStorage.setItem('favorites', JSON.stringify(this.favoriteStorage))
+      this.isFavoritesClicked = !this.isFavoritesClicked
     },
-    setFavoritesInLocalStorage() {},
+    filter() {
+      if (!this.selectedCategory || this.selectedCategory === 'Alle') {
+        return true
+      }
+      const x = Object.values(this.categories)
+
+      return !!x.find((el) => el === this.selectedCategory)
+    },
   },
 }
 </script>
@@ -143,7 +161,13 @@ a {
   width: 25px;
 }
 
-.post-like-button {
+.post-like-button__default {
   border: 1px solid lightgray;
+  transition: 200ms ease-in;
+}
+
+.post-like-button__clicked {
+  background: #f6cc63;
+  transition: 200ms ease-in;
 }
 </style>
