@@ -7,6 +7,9 @@
     <section class="post-content container mx-auto px-4 pt-8">
       <h1 class="text-3xl font-bold mb-5">{{ title }}</h1>
       <p>{{ content }}</p>
+      <span v-for="cat in categories" :key="cat">
+        <span>{{ cat }}</span>
+      </span>
     </section>
   </div>
 </template>
@@ -20,9 +23,11 @@ export default {
       })
       .then((res) => {
         return {
+          id: res.data.story.content.id,
           image: res.data.story.content.thumbnail,
           title: res.data.story.content.title,
           content: res.data.story.content.content,
+          categories: res.data.story.content.categories,
         }
       })
   },

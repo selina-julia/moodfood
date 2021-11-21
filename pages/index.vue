@@ -1,17 +1,36 @@
 <template>
   <div class="flex">
-    <aside class="w-2/12">filter here</aside>
+    <aside class="w-2/12">
+      <p v-for="cat in categories" :key="cat" @click="filter(cat)">
+        {{ cat }}
+      </p>
+    </aside>
     <section
       id="posts"
-      class="flex flex-wrap gap-8 w-100 container mx-auto px-4"
+      class="
+        grid
+        md:grid-cols-2
+        lg:grid-cols-3
+        xl:grid-cols-4
+        gap-8
+        w-100
+        container
+        mx-auto
+        px-4
+        mb-8
+      "
     >
       <PostPreview
         v-for="post in posts"
+        :id="post.id"
         :key="post.id"
         :title="post.title"
         :excerpt="post.previewText"
         :thumbnailImage="post.thumbnailUrl"
-        :id="post.id"
+        :categories="post.categories"
+        :isVisible="isVisible"
+        :difficulty="post.difficulty"
+        :minutes="post.minutes"
       />
     </section>
   </div>
@@ -41,32 +60,44 @@ export default {
               title: post.content.title,
               previewText: post.content.description,
               thumbnailUrl: post.content.thumbnail.filename,
+              categories: post.content.categories,
+              difficulty: post.content.difficulty,
+              minutes: post.content.minutes,
             }
           }),
         }
       })
   },
 
-  // data() {
-  //   return {
-  //     posts: [
-  //       {
-  //         title: 'Pizza alla Luigi',
-  //         previewText: 'This is a preview text',
-  //         thumbnailUrl:
-  //           'https://images.unsplash.com/photo-1579751626657-72bc17010498?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2069&q=80',
-  //         id: 'a-new-beginning',
-  //       },
-  //       {
-  //         title: 'Spaghetti Aglio, Olio e Scampi',
-  //         previewText: 'This is a preview text',
-  //         thumbnailUrl:
-  //           'https://images.unsplash.com/photo-1612874742237-6526221588e3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2071&q=80',
-  //         id: 'a-new-beginning',
-  //       },
-  //     ],
-  //   }
+  data() {
+    return {
+      categories: ['Chinesisch', 'Italienisch', 'Österreichisch'],
+      isVisible: true,
+    }
+  },
+
+  // mounted() {
+  //   console.log(this.posts)
   // },
+
+  methods: {
+    filter(selectedCat): void {
+      this.posts.forEach((post) => {
+        if (!post.categories) {
+          return
+        }
+
+        post.categories.forEach((cats) => {
+          if (cats === selectedCat) {
+            this.isVisible = true
+          } else {
+            this.isVisible = false
+          }
+        })
+        console.log(this.isVisible)
+      })
+    },
+  },
 }
 </script>
 

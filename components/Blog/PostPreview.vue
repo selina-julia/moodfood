@@ -1,17 +1,22 @@
 <template>
-  <nuxt-link :to="id">
+  <nuxt-link :v-if="isVisible" :to="id">
     <article class="post-preview">
-      <!-- <div
-        :style="{ backgroundImage: 'url(' + thumbnailImage.filename + ')' }"
-        class="post-preview-thumbnail"
-      ></div> -->
-      <img class="post-preview-thumbnail" :src="thumbnailImage" alt="" />
-      <div class="post-preview-content mb-10">
+      <img class="post-preview-thumbnail mb-3" :src="thumbnailImage" alt="" />
+
+      <div class="post-preview-content flex flex-col justify-between">
         <h1 class="text-2xl font-bold pr-5 mb-2">{{ title }}</h1>
 
         <div class="flex justify-between">
-          <span>Easy</span>
-          <span>30 min</span>
+          <span class="flex">
+            <span v-for="i in iterator" :key="i" class="mr-1">
+              <img
+                class="difficulty-icon"
+                src="../../static/icons/cooking-hat.svg"
+                alt=""
+              />
+            </span>
+          </span>
+          <span>{{ minutes }} min</span>
         </div>
       </div>
     </article>
@@ -37,6 +42,43 @@ export default {
       type: String,
       required: true,
     },
+    categories: {
+      type: String[{}],
+      required: true,
+    },
+    isVisible: {
+      type: Boolean,
+      required: true,
+    },
+    minutes: {
+      type: Number,
+      required: true,
+    },
+    difficulty: {
+      type: String,
+      required: true,
+    },
+  },
+
+  data() {
+    return {
+      iterator: 0,
+    }
+  },
+
+  mounted() {
+    switch (this.difficulty) {
+      case 'einfach':
+        this.iterator = 1
+        break
+      case 'mittel':
+        this.iterator = 2
+        break
+      case 'schwierig':
+        this.iterator = 3
+        break
+    }
+    console.log(this.iterator)
   },
 }
 </script>
@@ -45,24 +87,29 @@ export default {
 a {
   text-decoration: none;
   color: black;
-  width: 23%;
 }
 
 .post-preview {
   border: 1px solid lightgray;
   border-radius: 15%;
   height: 100%;
+  padding: 6%;
 }
 
 .post-preview-thumbnail {
   width: 100%;
-  height: 270px;
+  height: 250px;
   object-fit: cover;
-  padding: 6%;
   border-radius: 25%;
+  box-shadow: 5px 5px 20px 0 rgba(0, 0, 0, 0.15);
 }
 
 .post-preview-content {
-  padding: 0 2rem;
+  padding: 0 1rem;
+  height: 25%;
+}
+
+.difficulty-icon {
+  width: 25px;
 }
 </style>
