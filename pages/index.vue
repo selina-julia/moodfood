@@ -1,6 +1,14 @@
 <template>
   <div class="flex">
     <aside class="w-2/12 pt-6 mr-5">
+      <input
+        class="px-3 py-2 mb-5"
+        type="text"
+        v-model="search"
+        @change="filteredList()"
+        placeholder="Search title.."
+      />
+
       <div
         v-for="cat in categories"
         :key="cat"
@@ -13,10 +21,10 @@
     </aside>
     <section
       id="posts"
-      class="container grid gap-8 px-4 mx-auto mb-8  md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 w-100"
+      class="container grid gap-8 px-4 mx-auto mb-8  md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 w-100"
     >
       <PostPreview
-        v-for="post in posts"
+        v-for="post in filteredList()"
         :id="post.id"
         :key="post.id"
         :title="post.title"
@@ -66,15 +74,36 @@ export default {
 
   data() {
     return {
-      categories: ['Alle', 'Chinesisch', 'Italienisch', 'Österreichisch'],
+      categories: [
+        'Alle',
+        'Brot',
+        'Chinesisch',
+        'Hühnerfleisch',
+        'Italienisch',
+        'Kartoffeln',
+        'Meeresfrüchte',
+        'Österreichisch',
+        'Rindfleisch',
+        'Salat',
+        'Schweinefleisch',
+        'Süßes',
+        'Vegetarisch',
+      ],
       isVisible: false,
       selectedCat: '',
+      search: '',
     }
   },
 
   methods: {
     filter(selectedCat): void {
       this.selectedCat = selectedCat
+    },
+    filteredList() {
+      console.log(this.search)
+      return this.posts.filter((post) => {
+        return post.title.toLowerCase().includes(this.search.toLowerCase())
+      })
     },
   },
 }
