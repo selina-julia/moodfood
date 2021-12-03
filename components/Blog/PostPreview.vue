@@ -87,6 +87,10 @@ export default {
       type: String,
       required: true,
     },
+    link: {
+      type: String,
+      required: true,
+    },
   },
 
   data() {
@@ -142,11 +146,13 @@ a {
   border-radius: 15%;
   height: 100%;
   padding: 6%;
+  max-height: 25rem;
+  min-height: 25rem;
 }
 
 .post-preview-thumbnail {
   width: 100%;
-  height: 250px;
+  height: 240px;
   object-fit: cover;
   border-radius: 25%;
   box-shadow: 5px 5px 20px 0 rgba(0, 0, 0, 0.15);

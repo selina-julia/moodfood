@@ -1,13 +1,22 @@
 <template>
   <div class="flex">
     <aside class="w-2/12 pt-6 mr-5">
-      <input
-        class="px-3 py-2 mb-5"
-        type="text"
-        v-model="search"
-        @change="filteredList()"
-        placeholder="Search title.."
-      />
+      <div class="relative mb-5 mr-7 search-container">
+        <input
+          id="search-bar"
+          v-model="search"
+          type="text"
+          class="px-3 py-2 mb-5"
+          placeholder="Search title.."
+          @change="filteredList()"
+        />
+
+        <a href="#"
+          ><img
+            class="search-icon"
+            src="http://www.endlessicons.com/wp-content/uploads/2012/12/search-icon.png"
+        /></a>
+      </div>
 
       <div
         v-for="cat in categories"
@@ -34,6 +43,7 @@
         :selectedCategory="selectedCat"
         :difficulty="post.difficulty"
         :minutes="post.minutes"
+        :link="post.link"
       />
     </section>
   </div>
@@ -66,6 +76,7 @@ export default {
               categories: post.content.categories,
               difficulty: post.content.difficulty,
               minutes: post.content.minutes,
+              link: post.content.link,
             }
           }),
         }
@@ -130,5 +141,41 @@ aside::before {
   content: '';
   z-index: -1;
   border-radius: 0 20px 20px 0;
+}
+
+input#search-bar {
+  margin: 0 auto;
+  width: 100%;
+  height: 45px;
+  padding: 0 20px;
+  font-size: 1rem;
+  border: 1px solid #d0cfce;
+  outline: none;
+  border-radius: 10px;
+}
+input#search-bar:focus {
+  border: 1px solid #f6cc63;
+  transition: 0.35s ease;
+  color: #008abf;
+}
+input#search-bar:focus::-webkit-input-placeholder {
+  transition: opacity 0.45s ease;
+  opacity: 0;
+}
+input#search-bar:focus::-moz-placeholder {
+  transition: opacity 0.45s ease;
+  opacity: 0;
+}
+input#search-bar:focus:-ms-placeholder {
+  transition: opacity 0.45s ease;
+  opacity: 0;
+}
+
+.search-icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 45px;
+  width: 45px;
 }
 </style>
