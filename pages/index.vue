@@ -30,7 +30,18 @@
     </aside>
     <section
       id="posts"
-      class="container grid gap-8 px-4 mx-auto mb-8  md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 w-100"
+      class="
+        container
+        grid
+        gap-8
+        px-4
+        mx-auto
+        mb-8
+        md:grid-cols-2
+        lg:grid-cols-3
+        2xl:grid-cols-4
+        w-100
+      "
     >
       <PostPreview
         v-for="post in filteredList()"
@@ -43,7 +54,6 @@
         :selectedCategory="selectedCat"
         :difficulty="post.difficulty"
         :minutes="post.minutes"
-        :link="post.link"
       />
     </section>
   </div>
@@ -57,34 +67,58 @@ export default {
     PostPreview,
   },
 
-  asyncData(context) {
+  // eslint-disable-next-line camelcase
+  asyncData(context: {
+    app: {
+      $storyapi: {
+        get: (
+          arg0: string,
+          // eslint-disable-next-line camelcase
+          arg1: { version: string; starts_with: string }
+        ) => Promise<any>
+      }
+    }
+  }) {
     // fetch data from blog folder in storyblok
     return context.app.$storyapi
       .get('cdn/stories', {
         version: 'draft',
         starts_with: 'blog/',
       })
-      .then((res) => {
-        console.log(res)
+      .then((res: { data: { stories: any[] } }) => {
         return {
-          posts: res.data.stories.map((post) => {
-            return {
-              id: post.slug,
-              title: post.content.title,
-              previewText: post.content.description,
-              thumbnailUrl: post.content.thumbnail.filename,
-              categories: post.content.categories,
-              difficulty: post.content.difficulty,
-              minutes: post.content.minutes,
-              link: post.content.link,
+          posts: res.data.stories.map(
+            (post: {
+              slug: any
+              content: {
+                title: any
+                description: any
+                thumbnail: { filename: any }
+                categories: any
+                difficulty: any
+                minutes: any
+              }
+            }) => {
+              return {
+                id: post.slug,
+                title: post.content.title,
+                previewText: post.content.description,
+                thumbnailUrl: post.content.thumbnail.filename,
+                categories: post.content.categories,
+                difficulty: post.content.difficulty,
+                minutes: post.content.minutes,
+              }
             }
-          }),
+          ),
         }
       })
   },
 
   data() {
     return {
+      isVisible: false,
+      selectedCat: {},
+      search: {},
       categories: [
         'Alle',
         'Brot',
@@ -100,19 +134,15 @@ export default {
         'Süßes',
         'Vegetarisch',
       ],
-      isVisible: false,
-      selectedCat: '',
-      search: '',
     }
   },
 
   methods: {
-    filter(selectedCat): void {
+    filter(selectedCat: string): void {
       this.selectedCat = selectedCat
     },
-    filteredList() {
-      console.log(this.search)
-      return this.posts.filter((post) => {
+    filteredList(): unknown {
+      return this.posts.filter((post: { title: string }) => {
         return post.title.toLowerCase().includes(this.search.toLowerCase())
       })
     },

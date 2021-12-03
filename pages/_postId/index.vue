@@ -10,14 +10,6 @@
         <span class="px-2 py-1 mr-3 rounded-md detail-category">{{ cat }}</span>
       </span>
       <p class="mt-5">{{ content }}</p>
-      <iframe
-        id="video"
-        width="420"
-        height="315"
-        :src="link"
-        frameborder="0"
-        allowfullscreen
-      ></iframe>
     </section>
   </div>
 </template>
@@ -36,7 +28,6 @@ export default {
           title: res.data.story.content.title,
           content: res.data.story.content.content,
           categories: res.data.story.content.categories,
-          link: res.data.story.content.link,
         }
       })
   },

@@ -21,7 +21,18 @@
       </div>
     </nuxt-link>
     <div
-      class="absolute flex items-center justify-center bg-white  w-14 h-14 rounded-xl -top-2 -right-2"
+      class="
+        absolute
+        flex
+        items-center
+        justify-center
+        bg-white
+        w-14
+        h-14
+        rounded-xl
+        -top-2
+        -right-2
+      "
       :class="{
         'post-like-button__default': !isFavoritesClicked,
         'post-like-button__clicked': isFavoritesClicked,
@@ -84,10 +95,6 @@ export default {
       required: true,
     },
     difficulty: {
-      type: String,
-      required: true,
-    },
-    link: {
       type: String,
       required: true,
     },
