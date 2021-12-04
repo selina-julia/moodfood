@@ -4,7 +4,7 @@
       <img class="mb-3 post-preview-thumbnail" :src="thumbnailImage" alt="" />
 
       <div class="flex flex-col justify-between post-preview-content">
-        <h1 class="pr-5 mb-2 text-2xl font-bold">{{ title }}</h1>
+        <h1 class="line-clamp-2 pr-5 mb-2 text-2xl font-bold">{{ title }}</h1>
 
         <div class="flex justify-between">
           <span class="flex">
@@ -21,7 +21,18 @@
       </div>
     </nuxt-link>
     <div
-      class="absolute flex items-center justify-center bg-white  w-14 h-14 rounded-xl -top-2 -right-2"
+      class="
+        absolute
+        flex
+        items-center
+        justify-center
+        bg-white
+        w-14
+        h-14
+        rounded-xl
+        -top-2
+        -right-2
+      "
       :class="{
         'post-like-button__default': !isFavoritesClicked,
         'post-like-button__clicked': isFavoritesClicked,
@@ -53,7 +64,9 @@
 </template>
 
 <script>
-export default {
+import Vue from 'vue'
+
+export default Vue.extend({
   props: {
     title: {
       type: String,
@@ -84,10 +97,6 @@ export default {
       required: true,
     },
     difficulty: {
-      type: String,
-      required: true,
-    },
-    link: {
       type: String,
       required: true,
     },
@@ -132,7 +141,7 @@ export default {
       return !!x.find((el) => el === this.selectedCategory)
     },
   },
-}
+})
 </script>
 
 <style scoped>
