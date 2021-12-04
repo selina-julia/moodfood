@@ -116,12 +116,10 @@ export default {
   },
 
   data() {
-    const selectedCat: string = ''
-
     return {
       isVisible: false,
-      selectedCat: {},
-      search: {},
+      selectedCat: '',
+      search: '',
       categories: [
         'Alle',
         'Brot',
