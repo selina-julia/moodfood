@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 <template>
   <div class="flex">
     <aside class="w-2/12 pt-6 mr-5">
@@ -115,6 +116,8 @@ export default {
   },
 
   data() {
+    const selectedCat: string = ''
+
     return {
       isVisible: false,
       selectedCat: {},
@@ -138,10 +141,10 @@ export default {
   },
 
   methods: {
-    filter(selectedCat: string): void {
+    filter(selectedCat: any): void {
       this.selectedCat = selectedCat
     },
-    filteredList(): unknown {
+    filteredList(): any {
       return this.posts.filter((post: { title: string }) => {
         return post.title.toLowerCase().includes(this.search.toLowerCase())
       })

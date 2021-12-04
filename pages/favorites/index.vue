@@ -17,7 +17,6 @@ export default {
   methods: {
     getItemsFromLocalStorage() {
       this.favs = JSON.parse(localStorage.getItem('favorites'))
-      console.log(this.favs)
     },
   },
 }
