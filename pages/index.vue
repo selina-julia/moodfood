@@ -115,6 +115,17 @@ export default {
       })
   },
 
+  methods: {
+    filter(selectedCat: any): void {
+      this.selectedCat = selectedCat
+    },
+    filteredList(): any {
+      return this.posts.filter((post: { title: string }) => {
+        return post.title.toLowerCase().includes(this.search.toLowerCase())
+      })
+    },
+  },
+
   data() {
     return {
       isVisible: false,
@@ -136,17 +147,6 @@ export default {
         'Vegetarisch',
       ],
     }
-  },
-
-  methods: {
-    filter(selectedCat: any): void {
-      this.selectedCat = selectedCat
-    },
-    filteredList(): any {
-      return this.posts.filter((post: { title: string }) => {
-        return post.title.toLowerCase().includes(this.search.toLowerCase())
-      })
-    },
   },
 }
 </script>
