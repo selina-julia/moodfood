@@ -1,6 +1,6 @@
 <template>
   <header class="z-10 py-2 main-header backdrop-filter backdrop-blur-lg">
-    <div class="flex items-center justify-between px-16">
+    <div class="flex items-center justify-between px-5 md:px-16">
       <div class="text-2xl font-bold">mood<span class="title">food</span></div>
       <nav class="main-nav">
         <ul class="nav-links">

@@ -2,7 +2,7 @@
   <div class="">
     <TheHeader />
 
-    <main class="main-content px-16">
+    <main class="main-content md:px-16">
       <nuxt />
     </main>
   </div>
