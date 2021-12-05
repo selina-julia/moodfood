@@ -1,7 +1,16 @@
+// eslint-disable-next-line nuxt/no-cjs-in-config
+const axios = require('axios')
+
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
   buildDir: 'dist',
+  mode: 'universal',
+
+  env: {
+    baseUrl: process.env.BASE_URL,
+    nodeEnv: process.env.NODE_ENV,
+  },
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -49,9 +58,29 @@ export default {
     '@nuxtjs/auth-next',
     [
       'storyblok-nuxt',
-      { accessToken: 'KMOedrBdDc9YBnvirhovagtt', cacheProvider: 'memory' },
+      {
+        accessToken:
+          process.env.NODE_ENV === 'production'
+            ? 'CNcDIsYZIc8wra17Qv4lVAtt'
+            : 'KMOedrBdDc9YBnvirhovagtt',
+        cacheProvider: 'memory',
+      },
     ],
   ],
+
+  generate: {
+    routes() {
+      return axios
+        .get(
+          'https://api.storyblok.com/v1/cdn/stories?version=published&token=CNcDIsYZIc8wra17Qv4lVAtt&starts_with=blog&cv=' +
+            Math.floor(Date.now() / 1e3)
+        )
+        .then((res) => {
+          const blogPosts = res.data.stories.map((bp) => bp.full_slug)
+          return ['/', '/blog', '/about', ...blogPosts]
+        })
+    },
+  },
 
   // router: {
   //   middleware: ['auth'],

@@ -50,7 +50,7 @@
 </template>
 
 <script lang="ts">
-import PostPreview from '../components/Blog/PostPreview.vue'
+import PostPreview from '../../components/Blog/PostPreview.vue'
 
 export default {
   components: {
@@ -58,38 +58,70 @@ export default {
   },
 
   // eslint-disable-next-line camelcase
+  // asyncData(context: {
+  //   app: {
+  //     $storyapi: {
+  //       get: (
+  //         arg0: string,
+  //         // eslint-disable-next-line camelcase
+  //         arg1: { version: string; starts_with: string }
+  //       ) => Promise<any>
+  //     }
+  //   }
+  // }) {
+  //   // fetch data from blog folder in storyblok
+  //   return context.app.$storyapi
+  //     .get('cdn/stories', {
+  //       version: context.isDev ? "draft" : "published",
+  //       starts_with: 'blog/',
+  //     })
+  //     .then((res: { data: { stories: any[] } }) => {
+  //       return {
+  //         posts: res.data.stories.map(
+  //           (post: {
+  //             slug: any
+  //             content: {
+  //               title: any
+  //               description: any
+  //               thumbnail: { filename: any }
+  //               categories: any
+  //               difficulty: any
+  //               minutes: any
+  //             }
+  //           }) => {
+  //             return {
+  //               id: post.slug,
+  //               title: post.content.title,
+  //               previewText: post.content.description,
+  //               thumbnailUrl: post.content.thumbnail.filename,
+  //               categories: post.content.categories,
+  //               difficulty: post.content.difficulty,
+  //               minutes: post.content.minutes,
+  //             }
+  //           }
+  //         ),
+  //       }
+  //     })
+  // },
   asyncData(context) {
-    // fetch data from blog folder in storyblok
     return context.app.$storyapi
       .get('cdn/stories', {
         version: context.isDev ? 'draft' : 'published',
         starts_with: 'blog/',
       })
-      .then((res: { data: { stories: any[] } }) => {
+      .then((res) => {
         return {
-          posts: res.data.stories.map(
-            (post: {
-              slug: any
-              content: {
-                title: any
-                description: any
-                thumbnail: { filename: any }
-                categories: any
-                difficulty: any
-                minutes: any
-              }
-            }) => {
-              return {
-                id: post.slug,
-                title: post.content.title,
-                previewText: post.content.description,
-                thumbnailUrl: post.content.thumbnail.filename,
-                categories: post.content.categories,
-                difficulty: post.content.difficulty,
-                minutes: post.content.minutes,
-              }
+          posts: res.data.stories.map((post) => {
+            return {
+              id: post.slug,
+              title: post.content.title,
+              previewText: post.content.description,
+              thumbnailUrl: post.content.thumbnail.filename,
+              categories: post.content.categories,
+              difficulty: post.content.difficulty,
+              minutes: post.content.minutes,
             }
-          ),
+          }),
         }
       })
   },

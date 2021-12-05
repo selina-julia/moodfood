@@ -9,7 +9,9 @@
 export default {
   asyncData(context) {
     return context.app.$storyapi
-      .get('cdn/stories/about', { version: 'draft' })
+      .get('cdn/stories/about', {
+        version: context.isDev ? 'draft' : 'published',
+      })
       .then((res) => {
         return {
           title: res.data.story.content.title,
