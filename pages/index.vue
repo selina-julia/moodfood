@@ -7,7 +7,7 @@
           id="search-bar"
           v-model="search"
           type="text"
-          class="px-3 py-2 mb-5 rounded-md"
+          class="py-3 my-1 rounded-md md:px-3"
           placeholder="Search title.."
           @change="filteredList()"
         />
@@ -18,11 +18,11 @@
             src="http://www.endlessicons.com/wp-content/uploads/2012/12/search-icon.png"
         /></a>
       </div>
-      <div class="flex flex-wrap md:block gap-x-3">
+      <div class="flex overflow-x-scroll md:block gap-x-2">
         <div
           v-for="cat in categories"
           :key="cat"
-          class="flex items-center px-3 py-1 mb-3 border-gray-400 rounded-md  md:block mobile-categories md:p-0 md:border-0 md:border-none"
+          class="flex items-center px-3 py-2 mb-3 border-gray-400 rounded-md  md:block mobile-categories md:p-0 md:border-0 md:border-none"
           @click="filter(cat)"
         >
           <input :id="cat" class="hidden md:inline" type="radio" name="cats" />
@@ -131,6 +131,10 @@ export default {
 </script>
 
 <style scoped>
+::-webkit-scrollbar {
+  display: none;
+}
+
 #posts {
   width: 100%;
 }
@@ -155,14 +159,30 @@ aside::before {
 }
 
 input#search-bar {
-  margin: 0 auto;
   width: 100%;
   height: 45px;
-  padding: 0 20px;
   font-size: 1rem;
-  border: 1px solid #d0cfce;
   outline: none;
+  position: relative;
+
+  @media (min-width: 768px) {
+    border: 1px solid #d0cfce;
+    padding: 0 20px;
+    margin: 0 auto;
+  }
 }
+
+.search-container::after {
+  @media (max-width: 768px) {
+    position: absolute;
+    border-bottom: 1px solid lightgray;
+    left: -100px;
+    right: -100px;
+    bottom: 0;
+    content: '';
+  }
+}
+
 input#search-bar:focus {
   border: 1px solid #f6cc63;
   transition: 0.35s ease;
@@ -190,7 +210,7 @@ input#search-bar:focus:-ms-placeholder {
 }
 
 .mobile-categories {
-  border: 1px solid;
+  border: 1px solid lightgray;
 
   @media (min-width: 768px) {
     border: 0;

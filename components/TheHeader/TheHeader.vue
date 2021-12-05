@@ -1,8 +1,52 @@
 <template>
   <header class="z-10 py-2 main-header backdrop-filter backdrop-blur-lg">
-    <div class="flex items-center justify-between px-5 md:px-16">
+    <div
+      class="flex items-center justify-between w-screen px-5 md:w-auto md:px-16"
+    >
       <div class="text-2xl font-bold">mood<span class="title">food</span></div>
-      <nav class="main-nav">
+      <object
+        class="w-8 h-8 md:hidden"
+        data="../../static/icons/menu.svg"
+        type="image/svg+xml"
+        @click="toggleMobileNav()"
+      >
+        <img
+          class="w-8 h-8 transition duration-200 ease-in-out"
+          src="../../static/icons/menu.svg"
+        />
+      </object>
+      <div
+        v-if="isNavVisible"
+        class="absolute top-0 left-0 right-0 flex justify-between w-screen h-screen px-5 py-5 bg-white "
+      >
+        <nav class="main-nav">
+          <ul class="">
+            <nuxt-link to="/" tag="li" class="nav-link"
+              ><a @click="closeMobileNav()">All Posts</a></nuxt-link
+            >
+            <nuxt-link to="/about" tag="li" class="nav-link"
+              ><a @click="closeMobileNav()">About</a></nuxt-link
+            >
+            <nuxt-link to="/favorites" tag="li" class="nav-link"
+              ><a @click="closeMobileNav()">Favoriten</a></nuxt-link
+            >
+          </ul>
+        </nav>
+        <object
+          class="w-6 h-6 md:hidden"
+          data="../../static/icons/close.svg"
+          type="image/svg+xml"
+          @click="toggleMobileNav()"
+        >
+          <img
+            class="w-6 h-6 transition duration-200 ease-in-out"
+            src="../../static/icons/close.svg"
+          />
+        </object>
+      </div>
+
+      <!-- desktop nav -->
+      <nav class="hidden main-nav md:block">
         <ul class="nav-links">
           <nuxt-link to="/" tag="li" class="nav-link"
             ><a>All Posts</a></nuxt-link
@@ -19,14 +63,38 @@
   </header>
 </template>
 
+<script lang="ts">
+export default {
+  data() {
+    return {
+      isNavVisible: false,
+    }
+  },
+
+  methods: {
+    toggleMobileNav() {
+      this.isNavVisible = !this.isNavVisible
+    },
+    closeMobileNav() {
+      this.isNavVisible = false
+    },
+  },
+}
+</script>
+
 <style scoped>
 .main-header {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 4.5rem;
   background-color: rgba(255, 255, 255, 0.85);
+  border-bottom: 1px solid lightgray;
+
+  @media (min-width: 768px) {
+    height: 4.5rem;
+    border: 0;
+  }
 }
 .main-nav {
   height: 100%;
