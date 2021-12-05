@@ -4,6 +4,7 @@ const axios = require('axios')
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
+  ssr: false,
   buildDir: 'dist',
   mode: 'universal',
 
@@ -69,6 +70,7 @@ export default {
   ],
 
   generate: {
+    fallback: true,
     routes() {
       return axios
         .get(
