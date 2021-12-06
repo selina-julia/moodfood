@@ -16,24 +16,35 @@
         />
       </object>
       <div
-        v-if="isNavVisible"
-        class="absolute top-0 left-0 right-0 flex justify-between w-screen h-screen px-5 py-5 bg-white "
+        :class="{
+          '-left-full -right-full transition-all duration-500 ease-in-out ':
+            !isNavVisible,
+          'left-0 right-0 transition-all duration-500 ease-in-out ':
+            isNavVisible,
+        }"
+        class="absolute top-0 left-0 right-0 flex justify-between w-screen h-screen px-5 py-5 bg-white  mobile-menu"
       >
-        <nav class="main-nav">
-          <ul class="">
-            <nuxt-link to="/" tag="li" class="nav-link"
-              ><a @click="closeMobileNav()">All Posts</a></nuxt-link
+        <nav class="w-full main-nav">
+          <ul class="flex flex-col items-center justify-center mt-40 gap-y-10">
+            <nuxt-link to="/" tag="li" class="nav-link mobile"
+              ><a class="text-4xl" @click="closeMobileNav()"
+                >All Posts</a
+              ></nuxt-link
             >
-            <nuxt-link to="/about" tag="li" class="nav-link"
-              ><a @click="closeMobileNav()">About</a></nuxt-link
+            <nuxt-link to="/about" tag="li" class="nav-link mobile"
+              ><a class="text-4xl" @click="closeMobileNav()"
+                >About</a
+              ></nuxt-link
             >
-            <nuxt-link to="/favorites" tag="li" class="nav-link"
-              ><a @click="closeMobileNav()">Favoriten</a></nuxt-link
+            <nuxt-link to="/favorites" tag="li" class="nav-link mobile"
+              ><a class="text-4xl" @click="closeMobileNav()"
+                >Favoriten</a
+              ></nuxt-link
             >
           </ul>
         </nav>
         <object
-          class="w-6 h-6 md:hidden"
+          class="absolute right-0 w-6 h-6 mr-5 md:hidden"
           data="../../static/icons/close.svg"
           type="image/svg+xml"
           @click="toggleMobileNav()"
@@ -83,6 +94,9 @@ export default {
 </script>
 
 <style scoped>
+.mobile-menu {
+  background-color: #f6cc63;
+}
 .main-header {
   position: fixed;
   top: 0;
@@ -119,6 +133,9 @@ export default {
 .nav-link.nuxt-link-exact-active {
   border-bottom: 3px solid #f6cc63;
 }
+.mobile.nuxt-link-exact-active {
+  border-bottom: 0;
+}
 .nav-link a {
   display: block;
   text-decoration: none;
@@ -128,5 +145,9 @@ export default {
 .nav-link.nuxt-link-exact-active a,
 .title {
   color: #f6cc63;
+}
+
+.mobile.nuxt-link-exact-active a {
+  color: white;
 }
 </style>

@@ -183,11 +183,6 @@ input#search-bar {
   }
 }
 
-input#search-bar:focus {
-  border: 1px solid #f6cc63;
-  transition: 0.35s ease;
-  color: #333;
-}
 input#search-bar:focus::-webkit-input-placeholder {
   transition: opacity 0.45s ease;
   opacity: 0;
