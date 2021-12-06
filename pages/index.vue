@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 <template>
   <div class="md:flex">
     <aside class="px-5 pt-6 pb-5 md:w-2/12 md:mr-5">
