@@ -15,7 +15,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'nuxt-storyblok-app',
+    title: 'moodfood',
     htmlAttrs: {
       lang: 'en',
     },
