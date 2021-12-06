@@ -17,7 +17,7 @@
             src="../../../static/icons/back.svg"
           />
         </object>
-        <nuxt-link to="/blog">Zurück</nuxt-link>
+        <nuxt-link to="/">Zurück</nuxt-link>
       </div>
 
       <h1 class="mb-5 text-5xl font-bold">{{ title }}</h1>
