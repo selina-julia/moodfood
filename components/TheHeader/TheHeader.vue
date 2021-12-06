@@ -22,7 +22,7 @@
           'left-0 right-0 transition-all duration-500 ease-in-out ':
             isNavVisible,
         }"
-        class="absolute top-0 left-0 right-0 flex justify-between w-screen h-screen px-5 py-5 bg-white  mobile-menu"
+        class="absolute top-0 flex justify-between w-screen h-screen px-5 py-5 bg-white  mobile-menu"
       >
         <nav class="w-full main-nav">
           <ul class="flex flex-col items-center justify-center mt-40 gap-y-10">
