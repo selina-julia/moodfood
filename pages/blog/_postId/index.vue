@@ -4,7 +4,22 @@
       class="post-thumbnail"
       :style="{ backgroundImage: 'url(' + image.filename + ')' }"
     ></div>
+
     <section class="container px-4 pt-8 mx-auto post-content">
+      <div class="flex items-center mb-4">
+        <object
+          v-if="!isFavoritesClicked"
+          data="../../../static/icons/back.svg"
+          type="image/svg+xml"
+        >
+          <img
+            class="w-5 h-5 mr-2 transition duration-200 ease-in-out"
+            src="../../../static/icons/back.svg"
+          />
+        </object>
+        <nuxt-link to="/blog">Zurück</nuxt-link>
+      </div>
+
       <h1 class="mb-5 text-5xl font-bold">{{ title }}</h1>
       <span v-for="cat in categories" :key="cat">
         <span class="px-2 py-1 mr-3 rounded-md detail-category">{{ cat }}</span>

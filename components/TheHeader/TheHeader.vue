@@ -3,7 +3,12 @@
     <div
       class="flex items-center justify-between w-screen px-5 md:w-auto md:px-16"
     >
-      <div class="text-2xl font-bold">mood<span class="title">food</span></div>
+      <nuxt-link to="/">
+        <div class="text-2xl font-bold">
+          mood<span class="title">food</span>
+        </div>
+      </nuxt-link>
+
       <object
         class="w-8 h-8 md:hidden"
         data="../../static/icons/menu.svg"
