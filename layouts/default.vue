@@ -2,7 +2,7 @@
   <div class="">
     <TheHeader />
 
-    <main class="main-content md:px-16">
+    <main class="w-screen overflow-x-hidden main-content md:px-16">
       <nuxt />
     </main>
   </div>

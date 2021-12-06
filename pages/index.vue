@@ -31,7 +31,7 @@
     </aside>
     <section
       id="posts"
-      class="container grid gap-8 px-4 mx-auto mb-8  md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 w-100"
+      class="container grid gap-8 px-4 pt-2 mx-auto mb-8  md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 w-100"
     >
       <PostPreview
         v-for="post in filteredList()"
