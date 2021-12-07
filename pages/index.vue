@@ -13,12 +13,14 @@
         <img
           class="
             absolute
-            w-4
-            h-4
+            w-6
+            h-6
+            lg:w-4 lg:h-4
             transition
             duration-200
             ease-in-out
-            right-3
+            right-2.5
+            lg:right-3
             top-3.5
           "
           src="../static/icons/search.svg"
