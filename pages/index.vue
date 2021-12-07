@@ -10,18 +10,27 @@
           placeholder="Search title.."
           @change="filteredList()"
         />
-
-        <a href="#"
-          ><img
-            class="search-icon"
-            src="http://www.endlessicons.com/wp-content/uploads/2012/12/search-icon.png"
-        /></a>
+        <img
+          class="
+            absolute
+            w-4
+            h-4
+            transition
+            duration-200
+            ease-in-out
+            right-3
+            top-3.5
+          "
+          src="../static/icons/search.svg"
+        />
       </div>
+
       <div class="flex overflow-x-scroll md:block gap-x-2">
         <div
           v-for="cat in categories"
           :key="cat"
           class="flex items-center px-3 py-2 mb-3 border-gray-400 rounded-md  md:block mobile-categories md:p-0 md:border-0 md:border-none"
+          :class="{ 'selected-category lg:bg-none': isCatSelected(cat) }"
           @click="filter(cat)"
         >
           <input :id="cat" class="hidden md:inline" type="radio" name="cats" />
@@ -129,6 +138,10 @@ export default {
         return post.title.toLowerCase().includes(this.search.toLowerCase())
       })
     },
+
+    isCatSelected(cat): boolean {
+      return cat === this.selectedCat
+    },
   },
 }
 </script>
@@ -136,6 +149,10 @@ export default {
 <style scoped>
 ::-webkit-scrollbar {
   display: none;
+}
+
+.selected-category {
+  background: ;
 }
 
 #posts {
@@ -209,6 +226,13 @@ input#search-bar:focus:-ms-placeholder {
 
 .mobile-categories {
   border: 1px solid lightgray;
+
+  @media (min-width: 768px) {
+    border: 0;
+  }
+}
+.mobile-categories.selected-category {
+  border: 2px solid #f6cc63;
 
   @media (min-width: 768px) {
     border: 0;
