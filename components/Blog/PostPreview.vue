@@ -89,6 +89,10 @@ export default Vue.extend({
       type: String,
       required: true,
     },
+    ingredients: {
+      type: String[{}],
+      required: true,
+    },
   },
 
   data() {

@@ -44,6 +44,7 @@
         :selectedCategory="selectedCat"
         :difficulty="post.difficulty"
         :minutes="post.minutes"
+        :ingredients="post.ingredients"
       />
     </section>
   </div>
@@ -66,6 +67,7 @@ export default {
         starts_with: 'blog/',
       })
       .then((res: { data: { stories: any[] } }) => {
+        console.log(res)
         return {
           posts: res.data.stories.map(
             (post: {
@@ -77,6 +79,7 @@ export default {
                 categories: any
                 difficulty: any
                 minutes: any
+                ingredients: any
               }
             }) => {
               return {
@@ -87,6 +90,7 @@ export default {
                 categories: post.content.categories,
                 difficulty: post.content.difficulty,
                 minutes: post.content.minutes,
+                ingredients: post.content.ingredients,
               }
             }
           ),
