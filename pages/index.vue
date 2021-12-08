@@ -1,7 +1,7 @@
 <template>
   <div class="md:flex">
-    <aside class="px-5 pt-6 pb-5 md:w-2/12 md:mr-5">
-      <div class="relative mb-5 rounded-md md:mr-7 search-container">
+    <aside class="px-5 pt-6 pb-5 lg:px-0 md:w-2/12 md:mr-5">
+      <div class="relative rounded-md mb-7 md:mr-7 search-container">
         <input
           id="search-bar"
           v-model="search"
@@ -35,8 +35,22 @@
           :class="{ 'selected-category lg:bg-none': isCatSelected(cat) }"
           @click="filter(cat)"
         >
-          <input :id="cat" class="hidden md:inline" type="radio" name="cats" />
-          <label :for="cat">{{ cat }}</label>
+          <div class="lg:flex">
+            <input :id="cat" class="hidden" type="radio" name="cats" />
+            <div
+              class="hidden  lg:block lg:h-full lg:mr-2 lg:rounded-sm filter-checkbox"
+            >
+              <img
+                class="w-5 h-5 p-0.5"
+                :class="{
+                  'opacity-100': isCatSelected(cat),
+                  'opacity-0': !isCatSelected(cat),
+                }"
+                src="../static/icons/tick.svg"
+              />
+            </div>
+            <label :for="cat">{{ cat }}</label>
+          </div>
         </div>
       </div>
     </aside>
@@ -153,8 +167,8 @@ export default {
   display: none;
 }
 
-.selected-category {
-  background: ;
+.filter-checkbox {
+  border: 1px solid black;
 }
 
 #posts {
