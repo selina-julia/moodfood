@@ -25,7 +25,7 @@
         <span class="px-2 py-1 mr-3 rounded-md detail-category">{{ cat }}</span>
       </span>
       <div class="mt-5 lg:flex">
-        <div class="w-full xl:w-7/12 ingredients-wrapper">
+        <div class="w-full xl:w-5/12 ingredients-wrapper">
           <h2 class="mt-5 mb-5 text-2xl font-medium">Zutaten</h2>
 
           <p v-for="i in ingredients" :key="i" class="mb-2">
@@ -34,7 +34,7 @@
             <span>{{ i.name }}</span>
           </p>
         </div>
-        <div class="instructions-wrapper">
+        <div class="w-full instructions-wrapper">
           <h2 class="mt-5 mb-2 text-2xl font-medium">Zubereitung</h2>
           <p class="mt-5 xl:mr-36">{{ content }}</p>
         </div>

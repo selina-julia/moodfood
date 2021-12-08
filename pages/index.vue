@@ -153,10 +153,6 @@ export default {
   display: none;
 }
 
-.selected-category {
-  background: ;
-}
-
 #posts {
   width: 100%;
 }
