@@ -119,9 +119,15 @@ export default Vue.extend({
   },
 
   methods: {
-    setFavorites(fav) {
-      this.favoriteStorage.push(fav)
+    getFavorites() {
+      const fav = localStorage.getItem('favorites')
+      console.log(fav)
+      return fav
+    },
 
+    setFavorites(fav) {
+      this.getFavorites()
+      this.favoriteStorage.push(fav)
       localStorage.setItem('favorites', JSON.stringify(this.favoriteStorage))
       this.isFavoritesClicked = !this.isFavoritesClicked
     },
